@@ -27,6 +27,7 @@
 #define M_PROJECTS			"Projects"
 #define M_TASKS				"Tasks"
 #define M_ACTIVITY			"Activity"
+#define M_OPTIONS			"Options"
 #define M_HELP				"Help"
 //Названия пунктов меню "File"
 #define M_NEXT_HOST			"Next BOINC host"
@@ -88,6 +89,10 @@
 #define M_NET_ACTIVITY_ALWAYS		"Network activity always available"
 #define M_NET_ACTIVITY_AUTO		"Network activity based on preferences"
 #define M_NET_ACTIVITY_NEVER		"Network activity suspend"
+//Defines menu "Options"
+#define M_PREFERENCES			"Options"
+#define M_READ_CONFIG_FILES		"Read config files"
+
 //Названия пунктов меню "Help"
 #define M_ABOUT				"About"
 #define M_KEY_BINDINGS			"Hot keys list"
@@ -102,18 +107,19 @@ TopMenu::TopMenu(/*Config* cfg*/) : NMenu(NRect(1,getmaxx(stdscr),0,0),true)
     additem(M_PROJECTS,"");
     additem(M_TASKS,"");
     additem(M_ACTIVITY,"");
+    additem(M_OPTIONS,"");	
     additem(M_HELP,"");
     additem(NULL,NULL);
-    setbackground(getcolorpair(COLOR_WHITE,COLOR_GREEN)|A_BOLD);
+    setbackground(getcolorpair(COLOR_WHITE,COLOR_BLUE)|A_BOLD);
     enableflag = true;
     disable();
 }
 
 
-bool TopMenu::action() //открыть субменю
+bool TopMenu::action() //open the submenu
 {
     bool result = false;
-    if (!items.empty()) //если уже открыто выходим
+    if (!items.empty()) //If we're already open layout
 	return false;
     //создаем подменю
     int begincol = (menu->itemlen+menu->spc_cols)*item_index(current_item(menu)) + menu->spc_cols; //смещение на экране по горизонтали
